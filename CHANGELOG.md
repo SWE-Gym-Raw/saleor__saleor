@@ -33,7 +33,6 @@ All notable, unreleased changes to this project will be documented in this file.
 - Truncate lenghty responses in `EventDeliveryAttempt` objects - #17044 by @wcislo-saleor
 
 ### Other changes
-
 - Added support for numeric and lower-case boolean environment variables - #16313 by @NyanKiyoshi
 - Fixed a potential crash when Checkout metadata is accessed with high concurrency - #16411 by @patrys
 - Add slugs to product/category/collection/page translations. Allow to query by translated slug - #16449 by @delemeator
@@ -49,3 +48,4 @@ All notable, unreleased changes to this project will be documented in this file.
 - Fix decreasing voucher code usage after changing `includeDraftOrderInVoucherUsage` to false - #17028 by @zedzior
 - Fix undiscounted price taxation when prices are entered with taxes - #16992 by @zedzior
 - Fix `products` sorting when using `sortBy: {field: COLLECTION}` - #17189 by @korycins
+- Always create checkout metadata for new checkouts - #17176 by @korycins
