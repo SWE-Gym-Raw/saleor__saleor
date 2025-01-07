@@ -48,7 +48,7 @@ from ..utils import (
     change_billing_address_in_checkout,
     change_shipping_address_in_checkout,
     clear_delivery_method,
-    delete_external_shipping_id,
+    delete_external_shipping_id_if_present,
     get_checkout_metadata,
     get_external_shipping_id,
     get_voucher_discount_for_checkout,
@@ -2311,10 +2311,9 @@ def test_delete_external_shipping_id(checkout):
     set_external_shipping_id(checkout, app_shipping_id)
 
     # when
-    deleted = delete_external_shipping_id(checkout)
+    delete_external_shipping_id_if_present(checkout)
 
     # then
-    assert deleted
     assert checkout.metadata_storage.private_metadata == initial_private_metadata
 
 
@@ -2325,10 +2324,9 @@ def test_delete_external_shipping_id_when_external_shipping_missing(checkout):
     checkout.metadata_storage.save()
 
     # when
-    deleted = delete_external_shipping_id(checkout)
+    delete_external_shipping_id_if_present(checkout)
 
     # then
-    assert not deleted
     assert checkout.metadata_storage.private_metadata == initial_private_metadata
 
 

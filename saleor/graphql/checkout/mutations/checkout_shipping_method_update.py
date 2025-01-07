@@ -7,7 +7,7 @@ from ....checkout.actions import call_checkout_info_event
 from ....checkout.error_codes import CheckoutErrorCode
 from ....checkout.fetch import fetch_checkout_info, fetch_checkout_lines
 from ....checkout.utils import (
-    delete_external_shipping_id,
+    delete_external_shipping_id_if_present,
     invalidate_checkout,
     is_shipping_required,
     set_external_shipping_id,
@@ -220,8 +220,7 @@ class CheckoutShippingMethodUpdate(BaseMutation):
             ]
             + invalidate_prices_updated_fields
         )
-        if delete_external_shipping_id(checkout=checkout):
-            checkout.metadata_storage.save()
+        delete_external_shipping_id_if_present(checkout=checkout)
 
         call_checkout_info_event(
             manager,
@@ -262,7 +261,6 @@ class CheckoutShippingMethodUpdate(BaseMutation):
             ]
             + invalidate_prices_updated_fields
         )
-        checkout.metadata_storage.save()
         call_checkout_info_event(
             manager,
             event_name=WebhookEventAsyncType.CHECKOUT_UPDATED,
@@ -284,8 +282,7 @@ class CheckoutShippingMethodUpdate(BaseMutation):
             ]
             + invalidate_prices_updated_fields
         )
-        if delete_external_shipping_id(checkout=checkout):
-            checkout.metadata_storage.save()
+        delete_external_shipping_id_if_present(checkout=checkout)
 
         call_checkout_info_event(
             manager,
